@@ -20,6 +20,6 @@ filebeat:
 # Multiple outputs may be used.
 output:
   ### Elasticsearch as output
-  elasticsearch:
+  logstash:
     # Array of hosts to connect to.
-     hosts: ["elasticsearch:9200"]
+     hosts: ["logstash:5044"]

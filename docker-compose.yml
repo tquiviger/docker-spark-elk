@@ -24,8 +24,8 @@ master:
     - 8080:8080
   volumes:
     - ./conf/master:/conf
-    - /Users/thomas/Work/spark-raptor/:/tmp/spark-raptor
-    - /Users/thomas/Work/spark-raptor/code/target/scala-2.11:/jar
+    - ~/Work/spark-raptor/:/tmp/spark-raptor
+    - ~/Work/spark-raptor/code/target/scala-2.11:/jar
 
 worker1:
   image: thomasquiviger/spark-elk
@@ -53,8 +53,8 @@ worker1:
     - 4041:4040
   volumes:
     - ./conf/worker:/conf
-    - /Users/thomas/Work/spark-raptor/:/tmp/spark-raptor
-    - /Users/thomas/Work/spark-raptor/code/target/scala-2.11:/jar
+    - ~/Work/spark-raptor/:/tmp/spark-raptor
+    - ~/Work/spark-raptor/code/target/scala-2.11:/jar
 worker2:
   image: thomasquiviger/spark-elk
   command: bash -c "/etc/init.d/filebeat start && bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077"
@@ -81,11 +81,11 @@ worker2:
     - 4042:4040
   volumes:
     - ./conf/worker:/conf
-    - /Users/thomas/Work/spark-raptor/:/tmp/spark-raptor
-    - /Users/thomas/Work/spark-raptor/code/target/scala-2.11:/jar
+    - ~/Work/spark-raptor/:/tmp/spark-raptor
+    - ~/Work/spark-raptor/code/target/scala-2.11:/jar
 elasticsearch:
   image: elasticsearch:latest
-  command: elasticsearch -Des.network.host=0.0.0.0
+  command: elasticsearch -Enetwork.host=0.0.0.0
   ports:
     - "9200:9200"
     - "9300:9300"
@@ -95,6 +95,7 @@ logstash:
   command: logstash -f /etc/logstash/conf.d/logstash.conf
   volumes:
     - ./logstash/config:/etc/logstash/conf.d
+    - ~/Work/data/logstash:/data
   ports:
     - "5000:5000"
     - "5044:5044"
